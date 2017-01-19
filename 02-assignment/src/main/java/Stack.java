@@ -1,30 +1,30 @@
 /**
  * Created by lukkiddd on 1/19/2017 AD.
  */
-public class Stack {
-    private static int top = 0;
-    private static int st[];
+public class Stack extends MyBuffer {
+    private static int top;
 
-    public Stack() {
+    Stack() {
         this(10);
     }
 
-    public Stack(int size) {
-        st = new int[size];
+    Stack(int x) {
+        super(x);
+        top = 0;
     }
 
-    public static void push(int item) {
-        if(top >= st.length) {
+    public void push(int x) {
+        if(top >= items.length) {
             System.out.println("Stack is full!");
         } else {
-            st[top++] = item;
+            items[top++] = x;
         }
 
     }
 
-    public static int pop() {
+    public int pop() {
         if(top > 0)
-            return st[--top];
+            return items[--top];
         System.out.println("Stack is underflow!");
         return 0;
     }

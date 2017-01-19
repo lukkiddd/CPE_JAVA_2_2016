@@ -1,42 +1,44 @@
 /**
  * Created by lukkiddd on 1/19/2017 AD.
  */
-public class Queue {
-    private static int head = 0;
-    private static int tail = 0;
-    private static int count = 0;
-    private static int q[];
+public class Queue extends MyBuffer {
+    private static int head;
+    private static int tail;
+    private static int count;
 
-    public Queue() {
+
+    Queue() {
         this(10);
     }
 
-    public Queue(int size) {
-        q = new int[size];
+    Queue(int x) {
+        super(x);
+        head = 0;
+        tail = 0;
+        count = 0;
     }
 
-    public static void add(int item) {
-        if(count >= q.length) {
+    public void add(int item) {
+        if(count >= items.length) {
             System.out.println("Queue is full!");
         } else {
-            if(tail >= q.length)
+            if(tail >= items.length)
                 tail = 0;
 
-            q[tail++] = item;
+            this.items[tail++] = item;
             count++;
         }
-
     }
 
-    public static int delete() {
-        if(count <= 0 || head > tail) {
+    public int delete() {
+        if(count <= 0) {
             System.out.println("Queue is empty!");
             return 0;
         }
         count--;
-        if(head >= q.length)
+        if(head >= items.length)
             head = 0;
-        return q[head++];
+        return items[head++];
 
     }
 
