@@ -9,9 +9,8 @@ public class PolymorphicArray {
 
         a[0] = new Dog("lessy", 100);
         a[1] = new Cat("fido", 100);
-        a[2] = new Human("Somchai", 100);
+        a[2] = new Human("Konthai", 100);
 
-        System.out.println("length = " + a.length);
 
         for( int i = 0; i < a.length; i++) {
             a[i].talk();
