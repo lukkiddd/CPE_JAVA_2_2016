@@ -18,59 +18,67 @@ public class Main {
 
         inventory = read();
 
-        System.out.println("===============");
-        System.out.println("== Inventory");
-        System.out.println("===============");
-        for(int i = 0; i < inventory.size(); i++) {
-            Item item = inventory.get(i);
-            System.out.printf("== %s | %20s \t | %d\t |\n", item.item_id, item.item_name,item.quantity );
-        }
-        System.out.println("===============");
-        System.out.println("== Search item");
-        Scanner Sc = new Scanner(System.in);
-        System.out.print("Search by Item ID: ");
-        String query = Sc.nextLine();
-        Item result = search(query);
-        while(result == null) {
+        while(true) {
             System.out.println("===============");
             System.out.println("== Inventory");
             System.out.println("===============");
-            for(int i = 0; i < inventory.size(); i++) {
+            for (int i = 0; i < inventory.size(); i++) {
                 Item item = inventory.get(i);
-                System.out.printf("== %s | %20s \t | %d\t |\n", item.item_id, item.item_name,item.quantity );
+                System.out.printf("== %s | %25s \t | %d\t |\n", item.item_id, item.item_name, item.quantity);
             }
             System.out.println("===============");
-            System.out.println("== Search item");
-            Sc = new Scanner(System.in);
+            System.out.println("== Search item ( type [exit] to end program)");
+            Scanner Sc = new Scanner(System.in);
             System.out.print("Search by Item ID: ");
-            query = Sc.nextLine();
-            result = search(query);
-        }
+            String query = Sc.nextLine();
+            if(query.equals("exit")) {
+                System.exit(0);
+            }
+            Item result = search(query);
+            while (result == null) {
+                System.out.println("===============");
+                System.out.println("== Inventory");
+                System.out.println("===============");
+                for (int i = 0; i < inventory.size(); i++) {
+                    Item item = inventory.get(i);
+                    System.out.printf("== %s | %25s \t | %d\t |\n", item.item_id, item.item_name, item.quantity);
+                }
+                System.out.println("===============");
+                System.out.println("== Search item ( type [exit] to end program)");
+                Sc = new Scanner(System.in);
+                System.out.print("Search by Item ID: ");
+                query = Sc.nextLine();
+                if(query.equals("exit")) {
+                    System.exit(0);
 
-        System.out.println("===============");
-        System.out.println("== [add/delete]");
-        Sc = new Scanner(System.in);
-        System.out.print("command: ");
-        String command = Sc.nextLine().toLowerCase();
-        while(!command.equals("add") && !command.equals("delete")) {
-            System.out.println("Please enter command again!");
+                }
+                result = search(query);
+            }
+
             System.out.println("===============");
             System.out.println("== [add/delete]");
             Sc = new Scanner(System.in);
             System.out.print("command: ");
-            command = Sc.nextLine().toLowerCase();
+            String command = Sc.nextLine().toLowerCase();
+            while (!command.equals("add") && !command.equals("delete")) {
+                System.out.println("Please enter command again!");
+                System.out.println("===============");
+                System.out.println("== [add/delete]");
+                Sc = new Scanner(System.in);
+                System.out.print("command: ");
+                command = Sc.nextLine().toLowerCase();
+            }
+
+            if (command.equals("add")) {
+                result.quantity += 1;
+            } else if (command.equals("delete")) {
+                result.quantity -= 1;
+            }
+            System.out.println("== Updated item");
+            System.out.printf("== %s | %25s \t | %d\t |\n", result.item_id, result.item_name, result.quantity);
+
+            save();
         }
-
-        if(command.equals("add")) {
-            result.quantity += 1;
-        } else if(command.equals("delete")) {
-            result.quantity -= 1;
-        }
-        System.out.println("== Updated item");
-        System.out.printf("== %s | %20s \t | %d\t |\n", result.item_id, result.item_name,result.quantity );
-
-        save();
-
 
     }
 
