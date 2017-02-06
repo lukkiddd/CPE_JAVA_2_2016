@@ -13,7 +13,12 @@ public class Item {
     Item(String item_id, String item_name, String quantity) {
         this.item_id = item_id;
         this.item_name = item_name;
-        this.quantity = Integer.parseInt(quantity.replace(" ",""));
+        try {
+            this.quantity = Integer.parseInt(quantity.replace(" ",""));
+        } catch(NumberFormatException e) {
+            System.out.println("This is not a number");
+            System.out.println(e.getMessage());
+        }
     }
 
 

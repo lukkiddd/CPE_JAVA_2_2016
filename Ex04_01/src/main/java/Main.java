@@ -2,7 +2,6 @@
  * Created by lukkiddd on 2/4/2017 AD.
  */
 
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 import java.io.BufferedReader;
@@ -26,13 +25,17 @@ public class Main {
             Scanner Sc = new Scanner(System.in);
             System.out.print("What X?:");
             String s = Sc.nextLine();
-            x = Integer.parseInt(s);
-
-            for(int i = 0; i < x; i++) {
-                int result = rand.nextInt(high-low) + low;
-                pw.println(result);
+            try {
+                x = Integer.parseInt(s);
+                for(int i = 0; i < x; i++) {
+                    int result = rand.nextInt(high-low) + low;
+                    pw.println(result);
+                }
+                pw.close();
+            } catch(NumberFormatException e){
+                System.out.println("This is not a number");
+                System.out.println(e.getMessage());
             }
-            pw.close();
 
         } catch (IOException e) {
             System.out.println("error: " + e);
